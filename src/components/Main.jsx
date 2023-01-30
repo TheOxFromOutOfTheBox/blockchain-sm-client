@@ -93,9 +93,9 @@ function Main() {
                 {connectionLabel}
             </p>
             {/* <CreateSchema></CreateSchema> */}
-            <ListSchema smsaid={serviceMsaId}></ListSchema>
-                {/* <CreateMessage></CreateMessage>
-                <ListMessage></ListMessage> */}
+            {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
+                <CreateMessage smsaid={serviceMsaId}></CreateMessage>
+                {/* <ListMessage></ListMessage> */}
         </div>
     )
 }

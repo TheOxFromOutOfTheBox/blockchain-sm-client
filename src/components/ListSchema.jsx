@@ -31,7 +31,7 @@ function ListSchema(props) {
                         <ul>
                             {posts.map((item) => (
                                 <>
-                                    <li key={item.schema_id}>{item.model_type}</li>
+                                    <li key={item.key}>{item.model_type}</li>
                                 </>
                             )
                             )}
