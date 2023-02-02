@@ -69,7 +69,14 @@ const Form = (props) => {
     const idx = props.postNum
     const model = posts[idx]
     // const Schema=avro.Type.forSchema(model)
-    // console.log(model.model_structure)
+    console.log(model.model_structure)
+    const a=model.model_structure
+    let b={}
+    a.map((item)=>{
+        b[item.name]=item.column_type
+        console.log(item.column_type)
+    })
+    console.log(b)
     const submitMessage = async () => {
         // let avroBuffer= Schema.toBuffer(values);
         console.log("avro buffer: ", values);
