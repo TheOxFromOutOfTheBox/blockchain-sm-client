@@ -3,6 +3,9 @@ import { createMessage } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
 // import { staticSchema } from "./CreateSchema";
 import * as avro from 'avsc'
+// import * as parquet from 'parquetjs'
+// import { ParquetModel } from "../types/frequency";
+
 
 
 const Dropdown = (props) => {
@@ -14,6 +17,12 @@ const Dropdown = (props) => {
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
+        // console.log("parquet")
+        // var schema = new parquet.ParquetSchema({
+        //     age: { type: 'UINT_32', encoding: 'RLE', bitWidth: 7 },
+        //   });
+        // console.log(schema);
+        console.log("itemmmmmmmmmmm")
         console.log(item)
         props.passToParent(item[0])
         setShowDropdown(false);
