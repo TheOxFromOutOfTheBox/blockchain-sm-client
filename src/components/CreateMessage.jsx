@@ -5,12 +5,13 @@ import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
 import * as avro from 'avsc'
 // import * as parquet from 'parquetjs'
 // import { ParquetModel } from "../types/frequency";
+// import { ParquetModel } from '../types/frequency';
 
 
 
-// import { testCompression, testParquetSchema } from "../helpers/parquet";
-// import * as generators from "@dsnp/test-generators";
-// import broadcastSchema from "./broadcast";
+import { testCompression, testParquetSchema } from "../helpers/parquet";
+import * as generators from "@dsnp/test-generators";
+// import broadcastSchema from "./broadcast";   
 
 // describe("Broadcast Spec", () => {
 //   testParquetSchema(broadcastSchema);
