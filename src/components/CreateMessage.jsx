@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { createMessage } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
-// import { staticSchema } from "./CreateSchema";
-import * as avro from 'avsc'
-// import * as parquet from 'parquetjs'
-// import { ParquetModel } from "../types/frequency";
-// import { ParquetModel } from '../types/frequency';
 
 // @dsnp/parquetjs error
 
