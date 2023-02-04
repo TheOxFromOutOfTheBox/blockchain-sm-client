@@ -7,7 +7,7 @@ import * as avro from 'avsc'
 // import { ParquetModel } from "../types/frequency";
 // import { ParquetModel } from '../types/frequency';
 
-
+// @dsnp/parquetjs error
 
 import { testCompression, testParquetSchema } from "../helpers/parquet";
 import * as generators from "@dsnp/test-generators";
