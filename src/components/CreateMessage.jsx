@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { createMessage } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
-// import { staticSchema } from "./CreateSchema";
-import * as avro from 'avsc'
-// import * as parquet from 'parquetjs'
-// import { ParquetModel } from "../types/frequency";
-// import { ParquetModel } from '../types/frequency';
 
-
+// @dsnp/parquetjs error
 
 // import { testCompression, testParquetSchema } from "../helpers/parquet";
 // import * as generators from "@dsnp/test-generators";
@@ -33,13 +28,7 @@ const Dropdown = (props) => {
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-        // console.log("parquet")
-        // var schema = new parquet.ParquetSchema({
-        //     age: { type: 'UINT_32', encoding: 'RLE', bitWidth: 7 },
-        //   });
-        // console.log(schema);
-        console.log("itemmmmmmmmmmm")
-        console.log(item)
+
         props.passToParent(item[0])
         setShowDropdown(false);
     };
@@ -74,7 +63,6 @@ const Form = (props) => {
     const [values, setValues] = useState({});
 
     const handleChange = (e) => {
-        // console.log(e.target.value)
         setValues({
             ...values,
             [e.target.name]: e.target.value,
@@ -83,7 +71,6 @@ const Form = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(values);
         submitMessage();
     };
 

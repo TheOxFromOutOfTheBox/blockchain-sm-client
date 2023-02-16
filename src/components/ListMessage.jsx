@@ -1,5 +1,4 @@
 import React from 'react'
-// import { MessageResponse } from "@frequency-chain/api-augment/interfaces";
 
 function ListMessage(props) {
   const listMessages = async () => {
