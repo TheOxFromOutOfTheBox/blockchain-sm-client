@@ -9,8 +9,8 @@ import * as avro from 'avsc'
 
 
 
-import { testCompression, testParquetSchema } from "../helpers/parquet";
-import * as generators from "@dsnp/test-generators";
+// import { testCompression, testParquetSchema } from "../helpers/parquet";
+// import * as generators from "@dsnp/test-generators";
 // import broadcastSchema from "./broadcast";   
 
 // describe("Broadcast Spec", () => {
@@ -104,11 +104,14 @@ const Form = (props) => {
     console.log(b)
     const submitMessage = async () => {
         // let avroBuffer= Schema.toBuffer(values);
-        console.log("avro buffer: ", values);
-        values.fromId=parseInt(values.fromId,10)
+        // console.log("avro buffer: ", values);
+        // values.fromId=parseInt(values.fromId,10)
+        let msg="Hi This Monish Pondey"
+        const encoded = Buffer.from(msg).toString('hex');
         await createMessage(
-          "values",
-          parseInt(props?.schema?.schema_id),
+          encoded,
+          0,
+        //   parseInt(props?.schema?.schema_id),
           () => {},
           handleError
         );
