@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { createMessage } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
 import { ParquetSchema, ParquetWriter } from "./parquet.esm";
+import * as avro from "avsc";
 
 // @dsnp/parquetjs error
 // import { testCompression, testParquetSchema } from "../helpers/parquet";
@@ -19,16 +20,25 @@ import { ParquetSchema, ParquetWriter } from "./parquet.esm";
 //   }));
 // });
 
+const Schema=avro.Type.forSchema({
+    type: "record",
+    name: "User",
+    fields: [
+      { name: "message", type: "string" },
+      { name: "fromuser", type: "string" },
+    ],
+  });
+
 const Dropdown = (props) => {
     // declare a schema for the `fruits` table
-    var schema = new ParquetSchema({
-        name: { type: 'UTF8' },
-        quantity: { type: 'INT64' },
-        price: { type: 'DOUBLE' },
-        date: { type: 'TIMESTAMP_MILLIS' },
-        in_stock: { type: 'BOOLEAN' }
-    });
-    console.log(schema);
+    // var schema = new ParquetSchema({
+    //     name: { type: 'UTF8' },
+    //     quantity: { type: 'INT64' },
+    //     price: { type: 'DOUBLE' },
+    //     date: { type: 'TIMESTAMP_MILLIS' },
+    //     in_stock: { type: 'BOOLEAN' }
+    // });
+    // console.log(schema);
     const items = props.items
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedItem, setSelectedItem] = useState("Select an item");
@@ -88,16 +98,25 @@ const Form = (props) => {
     }
     const posts = props.posts
     const idx = props.postNum
-    const model = posts[idx]
-    // const Schema=avro.Type.forSchema(model)
-    console.log(model.model_structure)
-    const a=model.model_structure
-    let b={}
-    a.map((item)=>{
-        b[item.name]=item.column_type
-        console.log(item.column_type)
-    })
-    console.log(b)
+    // const model = posts[idx]
+    // // const Schema=avro.Type.forSchema(model)
+    // console.log(model.model_structure)
+    // const a=model.model_structure
+    // let b={}
+    // a.map((item)=>{
+    //     b[item.name]=item.column_type
+    //     console.log(item.column_type)
+    // })
+    // console.log(b)
+
+    const Fields=[
+        {
+            name:"Message"
+        },
+        {
+            name:"From"
+        }
+    ]
     const submitMessage = async () => {
         // var schema = new parquet.ParquetSchema({
         //     name: { type: 'UTF8' },
@@ -108,23 +127,30 @@ const Form = (props) => {
         //   await writer.appendRow({name: 'apples', quantity: 10 });
         //   await writer.appendRow({name: 'banana' }); // not in stock
         //   console.log("We done did it!")
-        // let avroBuffer= Schema.toBuffer(values);
-        // console.log("avro buffer: ", values);
-        // values.fromId=parseInt(values.fromId,10)
-        let msg="Hi This Monish Pondey"
-        const encoded = Buffer.from(msg).toString('hex');
+        let avroBuffer= Schema.toBuffer(values);
+        // console.log(avroBuffer)
+        console.log("avro buffer: ", values);
         await createMessage(
-          encoded,
-          0,
-        //   parseInt(props?.schema?.schema_id),
-          () => {},
-          handleError
-        );
+            avroBuffer,
+            1,
+            () => {},
+            handleError
+          );
+        console.log("Done did it")
+        // const encoded = Buffer.from(msg).toString('hex');
+        // await createMessage(
+        //   encoded,
+        //   0,
+        // //   parseInt(props?.schema?.schema_id),
+        //   () => {},
+        //   handleError
+        // );
       };
     return (
         <>
             <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md">
-                {model.model_structure.map((item) => (
+                {/* {model.model_structure.map((item) => ( */}
+                {Schema.fields.map((item) => (
                     (
                         <>
                             <div className="mb-4">
@@ -180,7 +206,7 @@ function CreateMessage(props) {
         arr.push(`${item.schema_id} - ${item.model_type}`)
     })
     const [index, setIndex] = useState(-1)
-    const [showForm, setShowForm] = useState(false)
+    const [showForm, setShowForm] = useState(true)
     function returnChildValue(value) {
         console.log(`value is ${value}`)
         setIndex(value - 1)
@@ -189,8 +215,8 @@ function CreateMessage(props) {
     
     return (
         <>
-            Index = {index}
-            <Dropdown items={arr} passToParent={returnChildValue}></Dropdown>
+            {/* Index = {index} */}
+            {/* <Dropdown items={arr} passToParent={returnChildValue}></Dropdown> */}
             {showForm && <Form postNum={index} posts={posts}></Form>}
         </>
     )

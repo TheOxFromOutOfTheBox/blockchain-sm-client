@@ -9,6 +9,7 @@ import {
     getMsaId,
     setupChainAndServiceProviders,
 } from "../services/dsnpWrapper";
+import Post from './Post'
 
 function Main() {
 
@@ -88,14 +89,16 @@ function Main() {
     });
     return (
         <div className="">
-            Id - {serviceMsaId.toString()}
+            {/* Id - {serviceMsaId.toString()}
             <p>
                 {connectionLabel}
-            </p>
+            </p> */}
             {/* <CreateSchema></CreateSchema> */}
             {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
                 <CreateMessage smsaid={serviceMsaId}></CreateMessage>
+
                 {/* <ListMessage></ListMessage> */}
+                {/* <Post></Post> */}
         </div>
     )
 }
