@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { createMessage } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
+import parquetjs from "@dsnp/parquetjs/dist/parquet"
+// Common JS
+// import parquetjs from "@dsnp/parquetjs/dist/browser/parquetjs.cjs"
+// ES Modules
+// import parquetjs from "@dsnp/parquetjs/dist/browser/parquetjs.esm"
 
 // @dsnp/parquetjs error
 
@@ -90,6 +95,15 @@ const Form = (props) => {
     })
     console.log(b)
     const submitMessage = async () => {
+        // var schema = new parquet.ParquetSchema({
+        //     name: { type: 'UTF8' },
+        //     quantity: { type: 'INT64', optional: true },
+        //   });
+          
+        //   var writer = await parquet.ParquetWriter.openFile(schema, 'fruits.parquet');
+        //   await writer.appendRow({name: 'apples', quantity: 10 });
+        //   await writer.appendRow({name: 'banana' }); // not in stock
+        //   console.log("We done did it!")
         // let avroBuffer= Schema.toBuffer(values);
         // console.log("avro buffer: ", values);
         // values.fromId=parseInt(values.fromId,10)
