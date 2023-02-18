@@ -109,14 +109,6 @@ const Form = (props) => {
     // })
     // console.log(b)
 
-    const Fields=[
-        {
-            name:"Message"
-        },
-        {
-            name:"From"
-        }
-    ]
     const submitMessage = async () => {
         // var schema = new parquet.ParquetSchema({
         //     name: { type: 'UTF8' },

@@ -97,7 +97,7 @@ function Main() {
             {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
                 <CreateMessage smsaid={serviceMsaId}></CreateMessage>
 
-                {/* <ListMessage></ListMessage> */}
+                <ListMessage></ListMessage>
                 {/* <Post></Post> */}
         </div>
     )
