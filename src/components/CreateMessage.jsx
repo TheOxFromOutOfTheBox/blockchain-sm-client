@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { createMessage } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
-import { ParquetSchema, ParquetWriter } from "./parquet.esm";
-
+import { ParquetSchema, ParquetWriter, toBuffer } from "./parquet.esm";
+import broadcast from "./dsnp/broadcast"
 // @dsnp/parquetjs error
 // import { testCompression, testParquetSchema } from "../helpers/parquet";
 // import * as generators from "@dsnp/test-generators";
@@ -18,9 +18,9 @@ import { ParquetSchema, ParquetWriter } from "./parquet.esm";
 //     url: `https://www.imadapp.com/data/posts/${generators.generateHash()}`,
 //   }));
 // });
-
-const Dropdown = (props) => {
+function parquet(){
     // declare a schema for the `fruits` table
+    
     var schema = new ParquetSchema({
         name: { type: 'UTF8' },
         quantity: { type: 'INT64' },
@@ -28,7 +28,23 @@ const Dropdown = (props) => {
         date: { type: 'TIMESTAMP_MILLIS' },
         in_stock: { type: 'BOOLEAN' }
     });
-    console.log(schema);
+    var buf = schema.toBuffer(schema)
+    // console.log(schema)
+    // create new ParquetWriter that writes to 'fruits.parquet`
+    var writer = async ()=>{return await ParquetWriter.openFile(schema, 'fruits.parquet');};
+    console.log("pq here")
+    var tp = async()=>{
+    console.log("pq2 here")
+    await writer.appendRow({name: 'apples', quantity: 10, price: 2.5, date: new Date(), in_stock: true});
+    await writer.appendRow({name: 'oranges', quantity: 10, price: 2.5, date: new Date(), in_stock: true});
+    console.log("Reached Here");
+    await writer.close();
+    return 1;
+    };
+}
+
+const Dropdown = (props) => {
+    parquet();
     const items = props.items
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedItem, setSelectedItem] = useState("Select an item");
@@ -90,14 +106,14 @@ const Form = (props) => {
     const idx = props.postNum
     const model = posts[idx]
     // const Schema=avro.Type.forSchema(model)
-    console.log(model.model_structure)
+    // console.log(model.model_structure)
     const a=model.model_structure
     let b={}
     a.map((item)=>{
         b[item.name]=item.column_type
-        console.log(item.column_type)
+        // console.log(item.column_type)
     })
-    console.log(b)
+    // console.log(b)
     const submitMessage = async () => {
         // let avroBuffer= Schema.toBuffer(values);
         // console.log("avro buffer: ", values);
@@ -156,7 +172,7 @@ function CreateMessage(props) {
             // console.log(schemas)
             // console.log("Hello");
             setPosts(schemas);
-            console.log(posts)
+            // console.log(posts)
 
         } catch (error) {
             console.log(error)
@@ -173,7 +189,7 @@ function CreateMessage(props) {
     const [index, setIndex] = useState(-1)
     const [showForm, setShowForm] = useState(false)
     function returnChildValue(value) {
-        console.log(`value is ${value}`)
+        // console.log(`value is ${value}`)
         setIndex(value - 1)
         setShowForm(true)
     }
