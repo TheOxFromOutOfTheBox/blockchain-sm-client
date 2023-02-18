@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { createMessage } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
-import parquetjs from "@dsnp/parquetjs/dist/parquet"
-// Common JS
-// import parquetjs from "@dsnp/parquetjs/dist/browser/parquetjs.cjs"
-// ES Modules
-// import parquetjs from "@dsnp/parquetjs/dist/browser/parquetjs.esm"
+import { ParquetSchema, ParquetWriter } from "./parquet.esm";
 
 // @dsnp/parquetjs error
-
 // import { testCompression, testParquetSchema } from "../helpers/parquet";
 // import * as generators from "@dsnp/test-generators";
 // import broadcastSchema from "./broadcast";   
@@ -25,6 +20,15 @@ import parquetjs from "@dsnp/parquetjs/dist/parquet"
 // });
 
 const Dropdown = (props) => {
+    // declare a schema for the `fruits` table
+    var schema = new ParquetSchema({
+        name: { type: 'UTF8' },
+        quantity: { type: 'INT64' },
+        price: { type: 'DOUBLE' },
+        date: { type: 'TIMESTAMP_MILLIS' },
+        in_stock: { type: 'BOOLEAN' }
+    });
+    console.log(schema);
     const items = props.items
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedItem, setSelectedItem] = useState("Select an item");
