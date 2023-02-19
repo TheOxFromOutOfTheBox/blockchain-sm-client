@@ -22,7 +22,7 @@ function ListMessage(props) {
         });
 
         setListOfMessage(allMessages);
-        setIsLoaded(!isLoaded);
+        setIsLoaded(true);
         console.log(listOfMessage)
     }
     return (
@@ -30,7 +30,7 @@ function ListMessage(props) {
             <p>Hi we here now.</p>
             {isLoaded?(
                 <>
-                    <Post posts={allMessages}></Post>
+                    <Post posts={listOfMessage}></Post>
                 </>
             ):(
                 <p>Loading Messages...</p>

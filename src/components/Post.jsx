@@ -35,6 +35,11 @@ function Like({likes}) {
 
 function Post(props) {
     const posts=props.posts;
+    console.log(posts);
+    posts.map((item)=>{
+        console.log(item.payload.message)
+        console.log(item.payload.fromuser)
+    })
     return (
         <div className="p-4">
             <h2 className="text-xl font-bold mb-4">Popular Posts</h2>
@@ -45,13 +50,13 @@ function Post(props) {
                 >
                     <div className="p-4 flex items-center justify-center flex-col mr-4">
                         <div className='p-3'>
-                            {post.fromuser}
+                            {post.payload.fromuser}
                         </div>
-                        {/* <Like likes={post.likes}></Like> */}
+                        {/* <Like likes={post.payload.likes}></Like> */}
                     </div>
                     <div className='col-span-4'>
-                        {/* <h3 className="text-lg font-semibold mb-2">{post.title}</h3> */}
-                        <p className="text-gray-700">{post.message}</p>
+                        {/* <h3 className="text-lg font-semibold mb-2">{post.payload.title}</h3> */}
+                        <p className="text-gray-700">{post.payload.message}</p>
                     </div>
                 </div>
             ))}
