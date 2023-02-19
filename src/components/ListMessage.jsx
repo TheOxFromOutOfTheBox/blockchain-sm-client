@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import Post from './Post';
 
 function ListMessage(props) {
     const [listOfMessage,setListOfMessage]=useState([])
+    const [isLoaded,setIsLoaded]=useState(false)
     const listMessages = async () => {
         const messages = await fetchMessagesForSchema(
             parseInt(props.schema.schema_id)
@@ -17,11 +19,19 @@ function ListMessage(props) {
         });
 
         setListOfMessage(allMessages);
+        setIsLoaded(!isLoaded);
     }
     console.log(allMessages)
     return (
         <>
             <p>Hi we here now.</p>
+            {isLoaded?(
+                <>
+                    <Post posts={allMessages}></Post>
+                </>
+            ):(
+                <p>Loading Messages...</p>
+            )}
         </>
     )
 }
