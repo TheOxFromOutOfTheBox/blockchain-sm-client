@@ -52,7 +52,7 @@ function Post(props) {
                         <div className='p-3'>
                             {post.payload.fromuser}
                         </div>
-                        {/* <Like likes={post.payload.likes}></Like> */}
+                        {/* <Like likes={post.`payload.likes}></Like> */}
                     </div>
                     <div className='col-span-4'>
                         {/* <h3 className="text-lg font-semibold mb-2">{post.payload.title}</h3> */}
