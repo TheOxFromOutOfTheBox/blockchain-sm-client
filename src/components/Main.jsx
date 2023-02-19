@@ -17,6 +17,7 @@ function Main() {
     const [msaId, setMsaId] = useState(0n);
     const [serviceMsaId, setServiceMsaId] = useState(0n);
     const [walletAddress, setWalletAddress] = useState("");
+    const [isLoggedIn,setIsLoggedIn]=useState(false)
 
     const [connectionLabel, setConnectionLabel] = useState("Chain waiting to connect...");
     const [chainConnectionClass, setChainConnectionClass] = useState("Footer--chainConnectionState");
@@ -46,6 +47,7 @@ function Main() {
         (async () => doLogin(addr))();
 
         setWalletAddress(addr);
+        setIsLoggedIn(true)
     };
 
     const doLogout = async () => {
@@ -55,6 +57,7 @@ function Main() {
         (async () => doLogout())();
         setMsaId(0n);
         setWalletAddress("");
+        setIsLoggedIn(false)
     };
 
     const registerMsa = () => {
@@ -89,16 +92,26 @@ function Main() {
     });
     return (
         <div className="">
-            {/* Id - {serviceMsaId.toString()}
-            <p>
-                {connectionLabel}
-            </p> */}
-            {/* <CreateSchema></CreateSchema> */}
-            {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
-                <CreateMessage smsaid={serviceMsaId}></CreateMessage>
+            {!isLoggedIn?(
+                <>
+                    <button className='bg-white border border-gray-400 text-gray-700 py-2 px-4 rounded-lg shadow-md hover:shadow-lg' onClick={()=>{login()}}>Login</button>
+                </>
+            ):(
+                <>
+                {/* Id - {serviceMsaId.toString()}
+                <p>
+                    {connectionLabel}
+                </p> */}
+                {/* <CreateSchema></CreateSchema> */}
+                {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
+                    <CreateMessage smsaid={serviceMsaId}></CreateMessage>
+    
+                    <ListMessage></ListMessage>
 
-                <ListMessage></ListMessage>
-                {/* <Post></Post> */}
+                    <button className='bg-white border border-gray-400 text-gray-700 py-2 px-4 rounded-lg shadow-md hover:shadow-lg' onClick={()=>{logout()}}>Logout</button>
+                
+                </>
+            )}
         </div>
     )
 }
