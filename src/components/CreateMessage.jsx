@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { createMessage } from "../services/chain/apis/extrinsic";
+import { createMessage,createSchema } from "../services/chain/apis/extrinsic";
 import { fetchAllSchemas } from '../services/chain/apis/extrinsic';
 import { ParquetSchema, ParquetWriter } from "./parquet.esm";
 import * as avro from "avsc";
@@ -20,7 +20,7 @@ import * as avro from "avsc";
 //   }));
 // });
 
-const Schema=avro.Type.forSchema({
+export const Schema=avro.Type.forSchema({
     type: "record",
     name: "User",
     fields: [
@@ -28,6 +28,12 @@ const Schema=avro.Type.forSchema({
       { name: "fromuser", type: "string" },
     ],
   });
+
+const doRegisterSchema = async () => {
+    await createSchema(JSON.stringify(Schema.schema()));
+    console.log("Schema registered!")
+    // setSchemaRegistered("Schema Registered");
+};
 
 const Dropdown = (props) => {
     // declare a schema for the `fruits` table
@@ -79,6 +85,11 @@ const Dropdown = (props) => {
 };
 
 const Form = (props) => {
+
+    // useEffect(()=>{
+    //     doRegisterSchema()
+    //     console.log("Schema registered")
+    // },[])
     const [values, setValues] = useState({});
 
     const handleChange = (e) => {
@@ -109,6 +120,14 @@ const Form = (props) => {
     // })
     // console.log(b)
 
+    const Fields=[
+        {
+            name:"Message"
+        },
+        {
+            name:"From"
+        }
+    ]
     const submitMessage = async () => {
         // var schema = new parquet.ParquetSchema({
         //     name: { type: 'UTF8' },
@@ -124,7 +143,7 @@ const Form = (props) => {
         console.log("avro buffer: ", values);
         await createMessage(
             avroBuffer,
-            1,
+            2,
             () => {},
             handleError
           );
@@ -140,6 +159,9 @@ const Form = (props) => {
       };
     return (
         <>
+            <button className='bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600' onClick={()=>doRegisterSchema()}>
+                Register Schema
+            </button>
             <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md">
                 {/* {model.model_structure.map((item) => ( */}
                 {Schema.fields.map((item) => (
