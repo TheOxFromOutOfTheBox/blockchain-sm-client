@@ -143,7 +143,7 @@ const Form = (props) => {
         console.log("avro buffer: ", values);
         await createMessage(
             avroBuffer,
-            2,
+            11,
             () => {},
             handleError
           );

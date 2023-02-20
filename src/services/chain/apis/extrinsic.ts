@@ -212,9 +212,9 @@ export const fetchMessagesForSchema = async (
   const api = requireGetProviderApi();
   const messages: BlockPaginationResponseMessage =
     await api.rpc.messages.getBySchemaId(schema_id, {
-      from_block: 0,
-      from_index: 0,
-      to_block: 50_000,
+      from_block: 549082,
+      from_index: 13,
+      to_block: 580_000,
       page_size: 100,
     });
   const { content } = messages;
