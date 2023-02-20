@@ -48,13 +48,13 @@ function Post(props) {
                     key={index}
                     className="bg-white rounded-lg shadow p-4 mb-4 grid grid-cols-6 gap-4"
                 >
-                    <div className="p-4 border-r-4 flex items-center justify-center flex-col mr-4">
-                        <div className='p-3'>
+                    <div className="p-4 flex items-center justify-center flex-col mr-4">
+                        <div className=''>
                             {post.payload.fromuser}
                         </div>
                         {/* <Like likes={post.`payload.likes}></Like> */}
                     </div>
-                    <div className='col-span-4'>
+                    <div className='border-gray-500 border-l-4 col-span-4 pl-4'>
                         {/* <h3 className="text-lg font-semibold mb-2">{post.payload.title}</h3> */}
                         <p className="text-gray-700">{post.payload.message}</p>
                     </div>

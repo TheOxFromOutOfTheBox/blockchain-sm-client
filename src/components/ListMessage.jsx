@@ -3,7 +3,7 @@ import Post from './Post';
 import { fetchMessagesForSchema } from '../services/chain/apis/extrinsic';
 import { Schema } from './CreateMessage';
 
-const fetchTime=3600
+const fetchTime=15
 
 function ListMessage(props) {
     const [listOfMessage,setListOfMessage]=useState([])

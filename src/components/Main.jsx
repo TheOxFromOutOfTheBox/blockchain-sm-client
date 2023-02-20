@@ -92,6 +92,7 @@ function Main() {
     });
     return (
         <div className="">
+            <h1 className='text-center font-3xl font-bold'>Vikalp</h1>
             {!isLoggedIn?(
                 <>
                     <button className='bg-white border border-gray-400 text-gray-700 py-2 px-4 rounded-lg shadow-md hover:shadow-lg' onClick={()=>{login()}}>Login</button>
@@ -104,11 +105,13 @@ function Main() {
                 </p> */}
                 {/* <CreateSchema></CreateSchema> */}
                 {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
+                    <div className='grid grid-cols-8 align-items-center'>
+                        <button className='bg-white border border-gray-400 col-start-8  text-gray-700 py-2 px-4 rounded-lg shadow-md hover:shadow-lg' onClick={()=>{logout()}}>Logout</button>
+                    </div>
+                    <ListMessage></ListMessage>
                     <CreateMessage smsaid={serviceMsaId}></CreateMessage>
     
-                    <ListMessage></ListMessage>
 
-                    <button className='bg-white border border-gray-400 text-gray-700 py-2 px-4 rounded-lg shadow-md hover:shadow-lg' onClick={()=>{logout()}}>Logout</button>
                 
                 </>
             )}

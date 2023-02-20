@@ -159,9 +159,11 @@ const Form = (props) => {
       };
     return (
         <>
-            <button className='bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600' onClick={()=>doRegisterSchema()}>
-                Register Schema
-            </button>
+            <div className='grid grid-cols-1 align-items-center justify-items-center'>
+                <button className='bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600' onClick={()=>doRegisterSchema()}>
+                    Register Schema
+                </button>
+            </div>
             <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md">
                 {/* {model.model_structure.map((item) => ( */}
                 {Schema.fields.map((item) => (
@@ -184,12 +186,14 @@ const Form = (props) => {
 
                     )
                 ))}
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
-                >
-                    Submit
-                </button>
+                <div className='grid grid-cols-1 align-items-center justify-items-center'>
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white  py-2 px-4 rounded-lg hover:bg-blue-600"
+                    >
+                        Submit
+                    </button>
+                </div>
             </form>
         </>
     );
