@@ -5,7 +5,7 @@ import { Schema } from './CreateMessage';
 import Channel from './Channel';
 
  //const fetchTime=3600
-const fetchTime=15
+const fetchTime=3
 
 function ListMessage(props) {
     const [listOfMessage,setListOfMessage]=useState([])

@@ -26,7 +26,6 @@ export const Schema = avro.Type.forSchema({
     fields: [
         { name: "message", type: "string" },
         { name: "fromuser", type: "string" },
-        { name: "channel", type: "string" },
     ],
 });
 

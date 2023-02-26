@@ -210,11 +210,16 @@ export const fetchMessagesForSchema = async (
   schema_id: number
 ): Promise<MessageResponse[]> => {
   const api = requireGetProviderApi();
+
+// Retrieve the latest header
+const lastHeader = await api.rpc.chain.getHeader();
+  console.log(lastHeader.number.toNumber());
+  console.log(typeof(lastHeader.number.toNumber()));
   const messages: BlockPaginationResponseMessage =
     await api.rpc.messages.getBySchemaId(schema_id, {
-      from_block: 549082,
+      from_block: lastHeader.number.toNumber()-40000,
       from_index: 13,
-      to_block: 593000,
+      to_block: lastHeader.number.toNumber()+10,
       page_size: 100,
     });
   const { content } = messages;
