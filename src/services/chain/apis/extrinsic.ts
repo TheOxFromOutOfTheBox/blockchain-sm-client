@@ -214,7 +214,7 @@ export const fetchMessagesForSchema = async (
     await api.rpc.messages.getBySchemaId(schema_id, {
       from_block: 549082,
       from_index: 13,
-      to_block: 580_000,
+      to_block: 593000,
       page_size: 100,
     });
   const { content } = messages;

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 // const posts = ([
 //     {
@@ -25,7 +25,7 @@ import React,{useState} from 'react'
 //     },
 // ]);
 
-function Like({likes}) {
+function Like({ likes }) {
     return (
         <div className='p-3 rounded-full bg-gray-400 text-white font-bold text-2xl'>
             {likes}
@@ -34,21 +34,25 @@ function Like({likes}) {
 }
 
 function Post(props) {
-    const posts=props.posts;
-    console.log(posts);
-    posts.map((item)=>{
-        console.log(item.payload.message)
-        console.log(item.payload.fromuser)
-    })
+    const posts = props.posts;
+    const chatRef = useRef(null);
+
+    useEffect(() => {
+        chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }, [posts]);
+    // console.log(posts);
+    // posts.map((item) => {
+    //     console.log(item.payload.message)
+    //     console.log(item.payload.fromuser)
+    // })
     return (
-        <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Popular Posts</h2>
+        <div className= "bg-gray-800 p-2 h-[50vh] w-[80vw] overflow-y-scroll" ref={chatRef}>
             {posts.map((post, index) => (
                 <div
                     key={index}
-                    className="bg-white rounded-lg shadow p-4 mb-4 grid grid-cols-6 gap-4"
+                    className="bg-gray-700 text-white rounded-lg shadow p-3 mb-2 grid grid-cols-6 gap-4"
                 >
-                    <div className="p-4 flex items-center justify-center flex-col mr-4">
+                    <div className="p-3 flex items-center justify-center flex-col mr-4">
                         <div className=''>
                             {post.payload.fromuser}
                         </div>
@@ -56,7 +60,7 @@ function Post(props) {
                     </div>
                     <div className='border-gray-500 border-l-4 col-span-4 pl-4'>
                         {/* <h3 className="text-lg font-semibold mb-2">{post.payload.title}</h3> */}
-                        <p className="text-gray-700">{post.payload.message}</p>
+                        <p className="text-white">{post.payload.message}</p>
                     </div>
                 </div>
             ))}

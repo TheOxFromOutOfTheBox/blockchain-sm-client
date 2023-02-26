@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Post from './Post';
 import { fetchMessagesForSchema } from '../services/chain/apis/extrinsic';
 import { Schema } from './CreateMessage';
+import Channel from './Channel';
 
+ //const fetchTime=3600
 const fetchTime=15
 
 function ListMessage(props) {
@@ -26,23 +28,15 @@ function ListMessage(props) {
 
         setListOfMessage(allMessages);
         // setIsLoaded(true);
-        console.log(listOfMessage)
+        // console.log(listOfMessage)
     }
     setTimeout(()=>{
         listMessages();
         console.log("ran timeout func");
     },fetchTime*1000);
     return (
-        <div className='p-4'>
+        <div className='p-4'>   
             <Post posts={listOfMessage}></Post>
-            {/* {isLoaded?(
-                <>
-                    <Post posts={listOfMessage}></Post>
-                </>
-            ):(
-                <p>Loading Messages...</p>
-            )}
-            <button onClick={()=>listMessages()} className='bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600'> Fetch Messages</button> */}
         </div>
     )
 }

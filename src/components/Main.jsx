@@ -3,6 +3,7 @@ import CreateMessage from './CreateMessage'
 import CreateSchema from './CreateSchema'
 import ListMessage from './ListMessage'
 import ListSchema from './ListSchema'
+import Channel from './Channel'
 import { createAccountViaService } from "../services/chain/apis/extrinsic";
 import * as wallet from "../services/wallets/wallet";
 import {
@@ -17,10 +18,11 @@ function Main() {
     const [msaId, setMsaId] = useState(0n);
     const [serviceMsaId, setServiceMsaId] = useState(0n);
     const [walletAddress, setWalletAddress] = useState("");
-    const [isLoggedIn,setIsLoggedIn]=useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const [connectionLabel, setConnectionLabel] = useState("Chain waiting to connect...");
     const [chainConnectionClass, setChainConnectionClass] = useState("Footer--chainConnectionState");
+    const [activeChannel,setActiveChannel]=useState(0);
 
     const walletType = wallet.WalletType.DOTJS;
     const doConnectWallet = async () => {
@@ -91,28 +93,34 @@ function Main() {
         })();
     });
     return (
-        <div className="">
-            <h1 className='text-center font-3xl font-bold'>Vikalp</h1>
-            {!isLoggedIn?(
+        <div className=" bg-gray-800">
+            <h1 className='text-center text-white text-xl font-bold'>Vikalp</h1>
+            {!isLoggedIn ? (
                 <>
-                    <button className='bg-white border border-gray-400 text-gray-700 py-2 px-4 rounded-lg shadow-md hover:shadow-lg' onClick={()=>{login()}}>Login</button>
+                    <button className='bg-white border border-gray-400 text-gray-700 py-2 px-2 rounded-lg shadow-md hover:shadow-lg' onClick={() => { login() }}>Login</button>
                 </>
-            ):(
+            ) : (
                 <>
-                {/* Id - {serviceMsaId.toString()}
+                    {/* Id - {serviceMsaId.toString()}
                 <p>
                     {connectionLabel}
                 </p> */}
-                {/* <CreateSchema></CreateSchema> */}
-                {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
+                    {/* <CreateSchema></CreateSchema> */}
+                    {/* <ListSchema smsaid={serviceMsaId}></ListSchema> */}
                     <div className='grid grid-cols-8 align-items-center'>
-                        <button className='bg-white border border-gray-400 col-start-8  text-gray-700 py-2 px-4 rounded-lg shadow-md hover:shadow-lg' onClick={()=>{logout()}}>Logout</button>
+                        <h2 className="text-white text-xl font-bold col-start-1">Latest Posts</h2>
+                        <button className='bg-red-500 col-start-8  text-gray-100 font-bold py-2 rounded-lg shadow-md hover:shadow-lg' onClick={() => { logout() }}>Logout</button>
                     </div>
-                    <ListMessage></ListMessage>
-                    <CreateMessage smsaid={serviceMsaId}></CreateMessage>
-    
+                    <div className="flex flex-row">
+                        <Channel active={activeChannel} setActiveChannel={setActiveChannel}></Channel>
+                        <div className="flex-col">
+                            <ListMessage active={activeChannel}></ListMessage>
+                            <CreateMessage smsaid={serviceMsaId}></CreateMessage>
+                        </div>
+                    </div>
 
-                
+
+
                 </>
             )}
         </div>
