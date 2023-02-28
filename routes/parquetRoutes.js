@@ -10,11 +10,15 @@ router.get('/', async (req,res) => {
         // create new ParquetWriter that writes to 'fruits.parquet`
     let writer = await parquet.ParquetWriter.openFile(ParquetSchema, './fruits.parquet');
 
-    // append a few rows to the file
-    await writer.appendRow({name: 'apples', quantity: 10, price: 2.5, date: new Date(), in_stock: true});
-    await writer.appendRow({name: 'oranges', quantity: 10, price: 2.5, date: new Date(), in_stock: true});
 
-    // await writer.appendRow({name: 'Banana', quantity: 24, price: 3.5, date: new Date(), in_stock: false});
+    console.log("Parquet Working");
+    // append a few rows to the file
+    await writer.appendRow({announcementType: 1, contentHash: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi', fromId: 1, url :'https://ipfs.io'});
+    await writer.appendRow({announcementType: 1, contentHash: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi', fromId: 1, url :'https://ipfs.io'});
+    await writer.appendRow({announcementType: 1, contentHash: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi', fromId: 1, url :'https://ipfs.io'});
+    await writer.appendRow({announcementType: 1, contentHash: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi', fromId: 1, url :'https://ipfs.io'});
+    await writer.appendRow({announcementType: 1, contentHash: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi', fromId: 1, url :'https://ipfs.io'});
+    await writer.appendRow({announcementType: 1, contentHash: 'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi', fromId: 1, url :'https://ipfs.io'});
 
     // close file to commit and save in disk
     await writer.close();
