@@ -1,15 +1,6 @@
-
 const parquet = require('@dsnp/parquetjs');
 
-// declare a schema for the `fruits` table
-// let schema = new parquet.ParquetSchema({
-//     name: { type: 'UTF8' },
-//     quantity: { type: 'INT64' },
-//     price: { type: 'DOUBLE' },
-//     date: { type: 'TIMESTAMP_MILLIS' },
-//     in_stock: { type: 'BOOLEAN' }
-// });
-let schema = new parquet.ParquetSchema({
+let broadcast = new parquet.ParquetSchema({
       announcementType:{
       type: 'INT32',
       compression: "GZIP",
@@ -32,5 +23,5 @@ let schema = new parquet.ParquetSchema({
     },
 });
 
-module.exports = schema;
+module.exports = broadcast;
 

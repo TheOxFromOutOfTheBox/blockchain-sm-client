@@ -12,6 +12,7 @@
   "dependencies": {
     "@dsnp/parquetjs": "^1.2.1",
     "express": "^4.18.2",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "web3.storage": "^4.4.0"
   }
 }
